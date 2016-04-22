@@ -1,0 +1,88 @@
+body {
+    background-color: white;
+}
+
+.header {
+    background-color: #413659;
+    width: 100%;
+    color: white;
+    font-family: 'Volkhov', serif;
+    font-size: 45px;
+    text-align: center;
+    padding: .5em;
+}
+
+.content-container {
+    background-color: #F2EFDF;
+}
+
+.introduction {
+    font-size: 16px;
+    padding: 2em;
+    line-height: 150%;
+    font-weight: 200px;
+    border-bottom: 1px dashed #211426;
+    border-spacing: 50px;
+}
+
+.list-label {
+    float: left;
+    padding: 1.5em 0px 1em 45px;
+    font-size: 20px;
+    color: #9BBFAB;
+    font-weight: bold;
+}
+
+.search {
+    float: right;
+    width: 250px;
+    padding: 2em 45px 1em 0em;
+}
+
+.boxes {
+    background-color: #656F8C;
+    font-family: 'Volkhov', serif;
+    color: white;
+    margin: .75em;
+    height: 180px;
+    width: 180px;
+    float: left;
+    border-radius:1em;
+    padding: 1em;
+}
+
+.box-name {
+    color: #9BBFAB;
+    font-size: 16px;
+    text-align: center;
+    padding: 2px 0px 10px 0px;
+}
+
+.box-info {
+    padding: 5px 0px;
+    color: white;
+    font-size: 13px;
+    font-family: sans-serif;;
+    font-weight: normal;
+    line-height: 100%;
+}
+
+.box-info-label {
+    color: #211426;
+}
+
+
+
+.pagination>li>a, .pagination>li>span {
+    color: #9BBFAB;
+}
+
+.pagination>.active>a,
+.pagination>.active>a:focus,
+.pagination>.active>a:hover,
+.pagination>.active>span,
+.pagination>.active>span:focus,
+.pagination>.active>span:hover {
+    background-color: #9BBFAB;
+    border: 1px solid #9BBFAB;
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Data Visualization App</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link href='https://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
+
+        <script src="/js/angular.min.js"></script>
+        <script src="/js/jquery-2.2.0.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/dirPagination.js"></script>
+        <script src="/js/app.js"></script>
+    </head>
+
+    <body ng-app="myApp">
+        <div class="header">
+            Victim or Villian?
+        </div>
+        <div class="col-lg-10 col-lg-offset-1 content-container">
+            <div class="introduction">
+                With the recent controversies surrounding the Black Lives Matter
+                movement, many people have been concerned about police-related deaths
+                and whether or not they represent remainders of racism in this country.
+                Instead of simply listening to what the media reports, here you can
+                explore the records of police related and decide for yourself the
+                implications of these statistics.
+
+                Below is a list of all recorded. Use the graph below.
+            </div>
+            <div ng-controller="MyController" class="my-controller list-container">
+                <div class="row">
+                    <span class="list-label">
+                        Individuals killed in police-related incidents
+                    </span>
+                    <span class="search">
+                        <input ng-model="q" id="search" class="form-control" placeholder="Search by keyword">
+                    </span>
+                </div>
+                <div class="row">
+                    <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage">
+                        <div class="boxes" >
+                            <div class="box-name">{{ person.Name }}</div>
+                            <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>
+                            <div class="box-info"><span class="box-info-label">Age: </span>{{ person.Age }}</div>
+                            <div class="box-info"><span class="box-info-label">Race: </span>{{ person.Race }}</div>
+                            <div class="box-info"><span class="box-info-label">Cause: </span>{{ person['Cause of Death'] }}</div>
+                        </div>
+                    </dir>
+                </div>
+
+                <div ng-controller="OtherController" class="other-controller">
+                    <div class="text-center">
+                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
