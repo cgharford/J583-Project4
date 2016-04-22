@@ -3,7 +3,9 @@ body {
 }
 
 .header {
-    background-color: #8A0917;
+    background-color: #8a0917;
+background-image: url("http://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
+/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
     width: 100%;
     color: white;
     font-family: 'Volkhov', serif;
@@ -14,6 +16,7 @@ body {
 
 .content-container {
     background-color: #B8AE9C;
+
 }
 
 .introduction {
