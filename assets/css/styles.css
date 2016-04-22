@@ -3,7 +3,7 @@ body {
 }
 
 .header {
-    background-color: #413659;
+    background-color: #8A0917;
     width: 100%;
     color: white;
     font-family: 'Volkhov', serif;
@@ -13,7 +13,7 @@ body {
 }
 
 .content-container {
-    background-color: #F2EFDF;
+    background-color: #B8AE9C;
 }
 
 .introduction {
@@ -21,7 +21,7 @@ body {
     padding: 2em;
     line-height: 150%;
     font-weight: 200px;
-    border-bottom: 1px dashed #211426;
+    border-bottom: 1px dashed white;
     border-spacing: 50px;
 }
 
@@ -29,7 +29,7 @@ body {
     float: left;
     padding: 1.5em 0px 1em 45px;
     font-size: 20px;
-    color: #9BBFAB;
+    color: #595241;
     font-weight: bold;
 }
 
@@ -40,7 +40,7 @@ body {
 }
 
 .boxes {
-    background-color: #656F8C;
+    background-color: #ACCFCC;
     font-family: 'Volkhov', serif;
     color: white;
     margin: .75em;
@@ -49,10 +49,11 @@ body {
     float: left;
     border-radius:1em;
     padding: 1em;
+    cursor: pointer;
 }
 
 .box-name {
-    color: #9BBFAB;
+    color: #8A0917;
     font-size: 16px;
     text-align: center;
     padding: 2px 0px 10px 0px;
@@ -68,13 +69,75 @@ body {
 }
 
 .box-info-label {
-    color: #211426;
+    color: #595241;
 }
 
+#personal-info {
+    padding: 20px 320px;
+    line-height: 150%;
+    font-size: 15px;
+    color: black;
+    font-weight: 200;
+}
+
+.photo {
+    width: 25%;
+    height: 25%;
+    float: left;
+    margin: 0em 1em 1em 0em;
+}
+
+#demographics {
+    line-height: 170%;
+}
+
+#personal-info-name {
+    font-size: 22px;
+    font-weight: 200;
+}
+
+#personal-info-demographics {
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+#personal-info-city {
+    color: #595241;
+    font-weight: 600;
+}
+
+#birth-and-cause {
+    padding: 1em 0em;
+}
+
+.questions {
+    color: #8A0917;
+    font-size: 18px;
+    font-weight: bold;;
+}
+
+#link {
+    padding: 2em 0em 0em 0em;
+    color: #595241;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+#hide-icon {
+    color: #8A0917;
+    float: right;
+    cursor: pointer;
+}
+
+.news-link{text-decoration: none; color: white;}
+.news-link:visited {text-decoration: none; color: white;}
+.news-link:hover {text-decoration: none; color: #ACCFCC;}
+.news-link:active {text-decoration: none; color: white;}
 
 
 .pagination>li>a, .pagination>li>span {
-    color: #9BBFAB;
+    color: #ACCFCC;
 }
 
 .pagination>.active>a,
@@ -83,6 +146,6 @@ body {
 .pagination>.active>span,
 .pagination>.active>span:focus,
 .pagination>.active>span:hover {
-    background-color: #9BBFAB;
-    border: 1px solid #9BBFAB;
+    background-color: #ACCFCC;
+    border: 1px solid #ACCFCC;
 }

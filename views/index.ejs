@@ -3,8 +3,9 @@
     <head>
         <title>Data Visualization App</title>
         <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="/css/styles.css" />
 
         <script src="/js/angular.min.js"></script>
         <script src="/js/jquery-2.2.0.min.js"></script>
@@ -15,7 +16,7 @@
 
     <body ng-app="myApp">
         <div class="header">
-            Victim or Villian?
+            Victims or Villians?
         </div>
         <div class="col-lg-10 col-lg-offset-1 content-container">
             <div class="introduction">
@@ -38,7 +39,7 @@
                     </span>
                 </div>
                 <div class="row">
-                    <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage">
+                    <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
                         <div class="boxes" >
                             <div class="box-name">{{ person.Name }}</div>
                             <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>
@@ -48,8 +49,30 @@
                         </div>
                     </dir>
                 </div>
+                <div id="personal-info" class="col-lg-12">
+                    <img ng-show="showImage" ng-src="{{image}}" class="photo">
+                    <i ng-click="hideIndivudualInfo()" class="fa fa-2x fa-times" id="hide-icon" aria-hidden="true"></i>
+                    <div id="demographics">
+                        <div id="personal-info-name">{{name}}</div>
+                        <div id="personal-info-demographics">{{race}} {{gender}}, {{age}} </div>
+                        <div id="personal-info-city">{{city}}</div>
+                    </div>
+                    <div id="birth-and-cause">
+                        <div class="answers">Date of death: {{date}}</div>
+                        <div class="answers">Cause of death: {{cause}}</div>
+                    </div>
+                    <div class="questions" id="">Was the deceased armed?</div>
+                    <div class="answers" id="">{{armed}}</div>
+                    <div class="questions" id="">Did the deceased have priors?</div>
+                    <div class="answers" id="">{{priors}}</div>
+                    <div class="questions" id="">Was the officer involved fired or suspended? </div>
+                    <div class="answers" id="">{{officer}}</div>
 
-                <div ng-controller="OtherController" class="other-controller">
+                    <div id="link">News story can be found
+                        <a ng-show="showLink" ng-src="{{newsLink}}" class="news-link"> here. </a>
+                    </div>
+                </div>
+                <div ng-controller="OtherController" class="other-controller col-lg-12">
                     <div class="text-center">
                         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
