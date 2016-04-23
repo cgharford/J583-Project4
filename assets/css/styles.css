@@ -20,12 +20,19 @@ background-image: url("http://www.transparenttextures.com/patterns/45-degree-fab
 }
 
 .introduction {
-    font-size: 16px;
+    font-size: 18px;
     padding: 2em;
     line-height: 150%;
     font-weight: 200px;
     border-bottom: 1px dashed white;
     border-spacing: 50px;
+    font-family: Helvetica;
+    font-weight: 300;
+}
+
+.line {
+    padding: 2em 0em;
+    border-bottom: 1px dashed white;
 }
 
 .list-label {
@@ -140,7 +147,7 @@ background-image: url("http://www.transparenttextures.com/patterns/45-degree-fab
 
 
 .pagination>li>a, .pagination>li>span {
-    color: #ACCFCC;
+    color: #A1C2BF;
 }
 
 .pagination>.active>a,
@@ -151,4 +158,75 @@ background-image: url("http://www.transparenttextures.com/patterns/45-degree-fab
 .pagination>.active>span:hover {
     background-color: #ACCFCC;
     border: 1px solid #ACCFCC;
+}
+.instructions {
+    font-size: 18px;
+    padding: 1em 2em;
+    line-height: 150%;
+    font-weight: 200px;
+    border-spacing: 50px;
+    font-family: Helvetica;
+    font-weight: 200;
+}
+
+.chart-container {
+    padding: 50px 30px;
+}
+
+.pie-chart-container {
+    float: right;
+}
+
+.category-panel {
+    background-color: white;
+    border-radius: 1em;
+    float: left;
+    padding: 2em 4em;
+}
+
+#category-label {
+    font-size: 25px;
+    font-family: Helvetica;
+    font-weight: 200;
+    text-align: center;
+    padding-bottom: .5em;
+}
+
+.category-button {
+    background-color: #eee;
+    padding: 1em;
+    margin: 1em;
+    font-weight: bold;
+    color: #595241;
+}
+
+.category-button:hover {
+    background-color: #ACCFCC;
+    cursor: pointer;
+}
+
+.category-button-active {
+    background-color: #ACCFCC;
+}
+
+/*.invisible {
+    opacity: 0;
+}*/
+
+g.slice {
+    font-size: 40px;
+}
+
+g.slice:hover {
+    fill: #eee;
+    font-size: 40px;
+    cursor: pointer;
+}
+
+.pie-slice {
+    border: 1px solid white;
+}
+
+.pie-slice:hover {
+    fill: #ccc;
 }

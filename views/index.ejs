@@ -10,6 +10,7 @@
         <script src="/js/angular.min.js"></script>
         <script src="/js/jquery-2.2.0.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
+        <script src="/js/d3.min.js"></script>
         <script src="/js/dirPagination.js"></script>
         <script src="/js/app.js"></script>
     </head>
@@ -77,6 +78,38 @@
                         <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
                     </div>
                 </div>
+                <div class="row">
+                    <span class="list-label">
+                        Statistics by Demographics
+                    </span>
+                </div>
+                <div class="instructions">
+                    With the recent controversies surrounding the Black Lives Matter
+                    movement, many people have been concerned about police-related deaths
+                    and whether or not they represent remainders of racism in this country.
+                    Instead of simply listening to what the media reports, here you can
+                    explore the records of police related and decide for yourself the
+                    implications of these statistics.
+
+                    Below is a list of all recorded. Use the graph below.
+                </div>
+                <div class="chart-container">
+                    <div class="category-panel">
+                        <div id="category-label">Categories</div>
+                        <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
+                        <div class="category-button" onclick="createPieChart('Cause of Death', this)">Cause of Death</div>
+                        <div class="category-button" id="race" onclick="createPieChart('Race', this)">Race</div>
+                        <div class="category-button" onclick="createPieChart('Age', this)">Age</div>
+                        <div class="category-button" onclick="createPieChart('State', this)">State</div>
+                        <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Armed</div>
+                        <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
+                        <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
+                    </div>
+                    <div class="pie-chart-container">
+                        <div id="chart"></div>
+                    </div>
+                </div>
+                <script src="/js/d3charts.js"></script>
             </div>
         </div>
     </body>

@@ -1,4 +1,17 @@
-var victims = [];
+// Initially load in our json file
+var victims = (function() {
+    var json = null;
+    $.ajax({
+        'async': false,
+        'global': false,
+        'url': "../victims.json",
+        'dataType': "json",
+        'success': function (data) {
+            json = data;
+        }
+    });
+    return json;
+})();
 
 var myApp = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
@@ -8,10 +21,7 @@ myApp.controller('MyController', [ '$scope', '$http', function($scope, $http) {
   $scope.victims = [];
   $scope.showImage = false;
   $scope.showLink = false;
-
-  $http.get('../victims.json').success(function(data){
-    $scope.victims = data;
-  });
+  $scope.victims = victims;
 
   $scope.displayIndivudualInfo = function(person) {
       $("#personal-info").show(500);
@@ -53,3 +63,8 @@ myApp.controller('MyController', [ '$scope', '$http', function($scope, $http) {
 }]);
 
 myApp.controller('OtherController', ['$scope', function($scope){}]);
+
+function updateVictims(data) {
+    victims = data;
+    console.log(victims);
+}
