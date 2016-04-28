@@ -26,14 +26,20 @@
             <div class="col-lg-10 col-lg-offset-1 content-container">
                 <!-- Introduction and instructions for angular component -->
                 <div class="introduction">
-                    With the recent controversies surrounding the Black Lives Matter
-                    movement, many people have been concerned about police-related deaths
-                    and whether or not they represent remainders of racism in this country.
-                    Instead of simply listening to what the media reports, here you can
-                    explore the records of police related and decide for yourself the
-                    implications of these statistics.
+                    With the recent controversies and social uproar surrounding the Black Lives Matter
+                    movement, the police force as a whole has been under a good deal of public scrutiny
+                    due to incidents involving police-involved fatalities. This data visualization application
+                    is drawn from a dataset of over 2,000 recorded police-related deaths from 2013-2015.
+                    Dive into the data and decide for yourself what implications these statistics have for our
+                    law enforcement and our country.
 
-                    Below is a list of all recorded. Use the graph below.
+                    <br><br>
+
+                    Below is a list of all deceased individuals from the given dataset. Use the pagination panel below
+                    the boxes to cycle through the data and the search bar to filter by any keywords. Click on any
+                    of the boxes to view a dropdown with more detailed information on each person. When you are
+                    finished viewing the personal information simply click the red X in the top right corner of
+                    the box to close the dropdown.
                 </div>
                 <div ng-controller="MyController" id= "MyController" class="my-controller list-container">
                     <div class="row">
@@ -95,14 +101,10 @@
                         </span>
                     </div>
                     <div class="instructions">
-                        With the recent controversies surrounding the Black Lives Matter
-                        movement, many people have been concerned about police-related deaths
-                        and whether or not they represent remainders of racism in this country.
-                        Instead of simply listening to what the media reports, here you can
-                        explore the records of police related and decide for yourself the
-                        implications of these statistics.
-
-                        Below is a list of all recorded. Use the graph below.
+                        Take a step back and look at the broader picture represented by the data.
+                        Here you can view the statistics related to the deaths filtered by specific
+                        categories. Click on the buttons on the left panel to change the chart and
+                        view the facts regarding each demographic or scenerio.
                     </div>
                     <!-- Contains pie chart and bar graph -->
                     <div class="chart-container">
@@ -112,8 +114,8 @@
                             <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
                             <div class="category-button" onclick="createPieChart('Cause of Death', this)">Cause of Death</div>
                             <div class="category-button" id="race" onclick="createPieChart('Race', this)">Race</div>
-                            <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Armed</div>
-                            <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
+                            <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Civilian Armed</div>
+                            <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Had Priors</div>
                             <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
                         </div>
                         <!-- Pie chart with labels -->
@@ -131,14 +133,10 @@
                             </span>
                         </div>
                         <div class="instructions">
-                            With the recent controversies surrounding the Black Lives Matter
-                            movement, many people have been concerned about police-related deaths
-                            and whether or not they represent remainders of racism in this country.
-                            Instead of simply listening to what the media reports, here you can
-                            explore the records of police related and decide for yourself the
-                            implications of these statistics.
-
-                            Below is a list of all recorded. Use the graph below.
+                            Now let's take a closer look at the age range of the deceased individuals
+                            and draw information from the statistics surrounding their death. Click on
+                            any of the bars to view the specific facts for a given age range on the right
+                            panel.
                         </div>
                         <!-- Bar chart with labels -->
                         <div id="bar-chart"></div>

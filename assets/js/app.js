@@ -1,6 +1,6 @@
 // Angular component of application
 
-// Initially load in our json file using ajax to gloabl variable
+// Initially load in our json file using ajax to global variable
 var deceased = (function() {
     var json = null;
     $.ajax({
