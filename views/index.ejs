@@ -16,74 +16,12 @@
     </head>
 
     <body ng-app="myApp">
-        <div class="header">
+        <div class="header col-lg-12">
             Innocent or Incriminate?
         </div>
-        <div class="col-lg-10 col-lg-offset-1 content-container">
-            <div class="introduction">
-                With the recent controversies surrounding the Black Lives Matter
-                movement, many people have been concerned about police-related deaths
-                and whether or not they represent remainders of racism in this country.
-                Instead of simply listening to what the media reports, here you can
-                explore the records of police related and decide for yourself the
-                implications of these statistics.
-
-                Below is a list of all recorded. Use the graph below.
-            </div>
-            <div ng-controller="MyController" class="my-controller list-container">
-                <div class="row">
-                    <span class="list-label">
-                        Individuals killed in police-related incidents
-                    </span>
-                    <span class="search">
-                        <input ng-model="q" id="search" class="form-control" placeholder="Search by keyword">
-                    </span>
-                </div>
-                <div class="row">
-                    <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
-                        <div class="boxes" >
-                            <div class="box-name">{{ person.Name }}</div>
-                            <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>
-                            <div class="box-info"><span class="box-info-label">Age: </span>{{ person.Age }}</div>
-                            <div class="box-info"><span class="box-info-label">Race: </span>{{ person.Race }}</div>
-                            <div class="box-info"><span class="box-info-label">Cause: </span>{{ person['Cause of Death'] }}</div>
-                        </div>
-                    </dir>
-                </div>
-                <div id="personal-info" class="col-lg-12">
-                    <img ng-show="showImage" ng-src="{{image}}" class="photo">
-                    <i ng-click="hideIndivudualInfo()" class="fa fa-2x fa-times" id="hide-icon" aria-hidden="true"></i>
-                    <div id="demographics">
-                        <div id="personal-info-name">{{name}}</div>
-                        <div id="personal-info-demographics">{{race}} {{gender}}, {{age}} </div>
-                        <div id="personal-info-city">{{city}}</div>
-                    </div>
-                    <div id="birth-and-cause">
-                        <div class="answers">Date of death: {{date}}</div>
-                        <div class="answers">Cause of death: {{cause}}</div>
-                    </div>
-                    <div class="questions" id="">Was the deceased armed?</div>
-                    <div class="answers" id="">{{armed}}</div>
-                    <div class="questions" id="">Did the deceased have priors?</div>
-                    <div class="answers" id="">{{priors}}</div>
-                    <div class="questions" id="">Was the officer involved fired or suspended? </div>
-                    <div class="answers" id="">{{officer}}</div>
-
-                    <div id="link">News story can be found
-                        <a ng-show="showLink" ng-src="{{newsLink}}" class="news-link"> here. </a>
-                    </div>
-                </div>
-                <div ng-controller="OtherController" class="other-controller col-lg-12">
-                    <div class="text-center">
-                        <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
-                    </div>
-                </div>
-                <div class="row">
-                    <span class="list-label">
-                        Statistics by Demographics
-                    </span>
-                </div>
-                <div class="instructions">
+        <div class="col-lg-12">
+            <div class="col-lg-10 col-lg-offset-1 content-container">
+                <div class="introduction">
                     With the recent controversies surrounding the Black Lives Matter
                     movement, many people have been concerned about police-related deaths
                     and whether or not they represent remainders of racism in this country.
@@ -93,23 +31,126 @@
 
                     Below is a list of all recorded. Use the graph below.
                 </div>
-                <div class="chart-container">
-                    <div class="category-panel">
-                        <div id="category-label">Categories</div>
-                        <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
-                        <div class="category-button" onclick="createPieChart('Cause of Death', this)">Cause of Death</div>
-                        <div class="category-button" id="race" onclick="createPieChart('Race', this)">Race</div>
-                        <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Armed</div>
-                        <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
-                        <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
+                <div ng-controller="MyController" class="my-controller list-container">
+                    <div class="row">
+                        <span class="list-label">
+                            Individuals killed in police-related incidents
+                        </span>
+                        <span class="search">
+                            <input ng-model="q" id="search" class="form-control" placeholder="Search by keyword">
+                        </span>
                     </div>
-                    <div class="pie-chart-container">
-                        <div id="chart-labels"></div>
-                        <div id="chart"></div>
+                    <div class="row">
+                        <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
+                            <div class="boxes" >
+                                <div class="box-name">{{ person.Name }}</div>
+                                <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>
+                                <div class="box-info"><span class="box-info-label">Age: </span>{{ person.Age }}</div>
+                                <div class="box-info"><span class="box-info-label">Race: </span>{{ person.Race }}</div>
+                                <div class="box-info"><span class="box-info-label">Cause: </span>{{ person['Cause of Death'] }}</div>
+                            </div>
+                        </dir>
                     </div>
+                    <div id="personal-info">
+                        <img ng-show="showImage" ng-src="{{image}}" class="photo">
+                        <i ng-click="hideIndivudualInfo()" class="fa fa-2x fa-times" id="hide-icon" aria-hidden="true"></i>
+                        <div id="demographics">
+                            <div id="personal-info-name">{{name}}</div>
+                            <div id="personal-info-demographics">{{race}} {{gender}}, {{age}} </div>
+                            <div id="personal-info-city">{{city}}</div>
+                        </div>
+                        <div id="birth-and-cause">
+                            <div class="answers">Date of death: {{date}}</div>
+                            <div class="answers">Cause of death: {{cause}}</div>
+                        </div>
+                        <div class="questions" id="">Was the deceased armed?</div>
+                        <div class="answers" id="">{{armed}}</div>
+                        <div class="questions" id="">Did the deceased have priors?</div>
+                        <div class="answers" id="">{{priors}}</div>
+                        <div class="questions" id="">Was the officer involved fired or suspended? </div>
+                        <div class="answers" id="">{{officer}}</div>
+
+                        <div id="link">News story can be found
+                            <a ng-show="showLink" ng-src="{{newsLink}}" class="news-link"> here. </a>
+                        </div>
+                    </div>
+                    <div ng-controller="OtherController" class="other-controller col-lg-12">
+                        <div class="text-center">
+                            <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <span class="list-label">
+                            Statistics by Demographics
+                        </span>
+                    </div>
+                    <div class="instructions">
+                        With the recent controversies surrounding the Black Lives Matter
+                        movement, many people have been concerned about police-related deaths
+                        and whether or not they represent remainders of racism in this country.
+                        Instead of simply listening to what the media reports, here you can
+                        explore the records of police related and decide for yourself the
+                        implications of these statistics.
+
+                        Below is a list of all recorded. Use the graph below.
+                    </div>
+                    <div class="chart-container">
+                        <div class="category-panel">
+                            <div id="category-label">Categories</div>
+                            <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
+                            <div class="category-button" onclick="createPieChart('Cause of Death', this)">Cause of Death</div>
+                            <div class="category-button" id="race" onclick="createPieChart('Race', this)">Race</div>
+                            <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Armed</div>
+                            <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
+                            <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
+                        </div>
+                        <div class="pie-chart-container">
+                            <div id="chart-labels"></div>
+                            <div id="pie-chart"></div>
+                        </div>
+                    </div>
+                    <div class="row"></div>
+                    <div id="bar-chart-container">
+                        <div class="row">
+                            <span class="list-label">
+                                Statistics by Demographics
+                            </span>
+                        </div>
+                        <div class="instructions">
+                            With the recent controversies surrounding the Black Lives Matter
+                            movement, many people have been concerned about police-related deaths
+                            and whether or not they represent remainders of racism in this country.
+                            Instead of simply listening to what the media reports, here you can
+                            explore the records of police related and decide for yourself the
+                            implications of these statistics.
+
+                            Below is a list of all recorded. Use the graph below.
+                        </div>
+                        <div id="bar-chart"></div>
+                        <div class="category-panel age-info">
+                            <div id="category-label">Age Statistics</div>
+                            <div id="age-label">25-29</div>
+                            <div class="general-age-label">Number of deaths:</div>
+                            <div class="general-age-response" id="age-number-deaths"></div>
+                            <div class="general-age-label">Percentage armed: </div>
+                            <div class="general-age-response" id="age-percentage-armed"></div>
+                            <div class="general-age-label">Most common race:</div>
+                            <div class="general-age-response" id="age-common-race"></div>
+                            <div class="general-age-label">Officer punished: </div>
+                            <div class="general-age-response" id="age-officer-punished"></div>
+                        </div>
+                        <div class="pie-chart-container">
+                            <div id="chart-labels"></div>
+                            <div id="pie-chart"></div>
+                        </div>
+                    </div>
+                    <script src="/js/d3charts.js"></script>
                 </div>
-                <script src="/js/d3charts.js"></script>
             </div>
+        </div>
+        <div class="footer col-lg-12">
+            <span>Code repository</span>
+            <span>Source credit</span>
         </div>
     </body>
 </html>

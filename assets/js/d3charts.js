@@ -1,21 +1,53 @@
-// D3 custum pie chart
-function pointIsInArc(pt, ptData, d3Arc) {
-  // Center of the arc is assumed to be 0,0
-  // (pt.x, pt.y) are assumed to be relative to the center
-  var r1 = d3Arc.innerRadius()(ptData), // Note: Using the innerRadius
-      r2 = d3Arc.outerRadius()(ptData),
-      theta1 = d3Arc.startAngle()(ptData),
-      theta2 = d3Arc.endAngle()(ptData);
+function getLabels(type) {
+    var labels = [];
 
-  var dist = pt.x * pt.x + pt.y * pt.y,
-      angle = Math.atan2(pt.x, -pt.y); // Note: different coordinate system.
+    for (i = 0; i < victims.length; i++) {
+        if (!labels.includes(victims[i][type])) {
+            labels.push(victims[i][type]);
+        }
+    }
 
-  angle = (angle < 0) ? (angle + Math.PI * 2) : angle;
-
-  return (r1 * r1 <= dist) && (dist <= r2 * r2) &&
-         (theta1 <= angle) && (angle <= theta2);
+    return labels;
 }
 
+function sortDataByType(type, ageRange) {
+    var labels = [];
+    var counts = [];
+    var data = [];
+
+    for (i = 0; i < victims.length; i++) {
+        if (!labels.includes(victims[i][type])) {
+            if (ageRange != null) {
+                age = victims[i]["Age"]
+                if (age >= ageRange[0] && age <= ageRange[1]) {
+                    labels.push(victims[i][type]);
+                    counts[labels.indexOf(victims[i][type])] = 1;
+                }
+            }
+            else {
+                labels.push(victims[i][type]);
+                counts[labels.indexOf(victims[i][type])] = 1;
+            }
+        }
+        else {
+            if (ageRange != null) {
+                age = victims[i]["Age"]
+                if (age >= ageRange[0] && age <= ageRange[1]) {
+                    counts[labels.indexOf(victims[i][type])] += 1;
+                }
+            }
+            else {
+                counts[labels.indexOf(victims[i][type])] += 1;
+            }
+        }
+    }
+
+    for (i = 0; i < labels.length; i++) {
+        data.push({"label": labels[i], "value": counts[labels.indexOf(labels[i])]});
+    }
+
+    return data;
+}
 
 function createPieChart(type, element) {
     if (element == null) {
@@ -43,19 +75,8 @@ function createPieChart(type, element) {
         "#949494"
     ];
 
-    var labels = [];
-    var counts = [];
-    var data = [];
-
-    for (i = 0; i < victims.length; i++) {
-        if (!labels.includes(victims[i][type])) {
-            labels.push(victims[i][type]);
-            counts[labels.indexOf(victims[i][type])] = 1;
-        }
-        else {
-            counts[labels.indexOf(victims[i][type])] += 1;
-        }
-    }
+    var labels = getLabels(type);
+    var data = sortDataByType(type, null);
 
     html = "";
     for (i = 0; i < labels.length; i++) {
@@ -65,13 +86,9 @@ function createPieChart(type, element) {
     $('#chart-labels').empty();
     $('#chart-labels').append(html);
 
-    for (i = 0; i < labels.length; i++) {
-        data.push({"label": labels[i], "value": counts[labels.indexOf(labels[i])]});
-    }
+    $('#pie-chart').empty();
 
-    $('#chart').empty();
-
-    var vis = d3.select('#chart')
+    var vis = d3.select('#pie-chart')
         .append("svg:svg")
         .data([data])
         .attr("width", w)
@@ -110,8 +127,6 @@ function createPieChart(type, element) {
         .attr("class", "pie-slice")
         .style("stroke", "#AAAAAA")
 
-    console.log(data);
-
     arcs.append("text")
         .attr("transform", function(d) {
             return "translate(" + arc.centroid(d) + ")";
@@ -146,14 +161,195 @@ function createPieChart(type, element) {
         .attr("class", "pie-text");
 }
 
-createPieChart("Race", null);
+function createBarChart() {
+    var type = "Age"
+    var w = window.innerWidth;
 
-// $(".slice").mouseover(function() {
-//     var id = $(this).get(0).id;
-//     $("#text-" + id).css("opacity", 1)
-// });
-//
-// $(".slice").mouseleave(function() {
-//     var id = $(this).get(0).id;
-//     $("#text-" + id).css("opacity", 0)
-// });
+    var data = [
+        {"label": "5-9", "value": 0},
+        {"label": "10-14", "value": 0},
+        {"label": "15-19", "value": 0},
+        {"label": "20-24", "value": 0},
+        {"label": "25-29", "value": 0},
+        {"label": "30-34", "value": 0},
+        {"label": "35-39", "value": 0},
+        {"label": "40-44", "value": 0},
+        {"label": "45-49", "value": 0},
+        {"label": "50-54", "value": 0},
+        {"label": "55-59", "value": 0},
+        {"label": "60-64", "value": 0},
+        {"label": "65-69", "value": 0},
+        {"label": "70-74", "value": 0},
+        {"label": "75-79", "value": 0},
+    ];
+
+    for (i = 0; i < victims.length; i++) {
+        if (victims[i][type] >= 5 && victims[i][type] <= 9) {
+            data[0]["value"] += 1;
+        }
+        if (victims[i][type] >= 10 && victims[i][type] <= 14) {
+            data[1]["value"] += 1;
+        }
+        if (victims[i][type] >= 15 && victims[i][type] <= 19) {
+            data[2]["value"] += 1;
+        }
+        if (victims[i][type] >= 20 && victims[i][type] <= 24) {
+            data[3]["value"] += 1;
+        }
+        if (victims[i][type] >= 25 && victims[i][type] <= 29) {
+            data[4]["value"] += 1;
+        }
+        if (victims[i][type] >= 30 && victims[i][type] <= 34) {
+            data[5]["value"] += 1;
+        }
+        if (victims[i][type] >= 35 && victims[i][type] <= 39) {
+            data[6]["value"] += 1;
+        }
+        if (victims[i][type] >= 40 && victims[i][type] <= 44) {
+            data[7]["value"] += 1;
+        }
+        if (victims[i][type] >= 45 && victims[i][type] <= 49) {
+            data[8]["value"] += 1;
+        }
+        if (victims[i][type] >= 50 && victims[i][type] <= 54) {
+            data[9]["value"] += 1;
+        }
+        if (victims[i][type] >= 55 && victims[i][type] <= 59) {
+            data[10]["value"] += 1;
+        }
+        if (victims[i][type] >= 60 && victims[i][type] <= 64) {
+            data[11]["value"] += 1;
+        }
+        if (victims[i][type] >= 65 && victims[i][type] <= 69) {
+            data[12]["value"] += 1;
+        }
+        if (victims[i][type] >= 70 && victims[i][type] <= 74) {
+            data[13]["value"] += 1;
+        }
+    }
+
+    var x = d3.scale.linear()
+        .domain([0, w * .6])
+        .range([0, 1400]);
+
+    var chart = d3.select("#bar-chart");
+
+    var bars = chart.selectAll("div")
+        .data(data)
+        .enter()
+        .append("div")
+        .attr("class", "bar-container")
+
+    bars.append("div")
+        .data(data)
+        .text(function(d) {
+            return d.label;
+        })
+        .attr("class", "bar-label");
+
+    bars.append("div")
+        .data(data)
+        .attr("class", "bars")
+        .style("width", function(d) {
+            return x(d.value) + "px";
+        })
+        .append("div")
+        .text(function(d) {
+            return ( 100 * (d.value / victims.length)).toFixed(2) + "%";
+        })
+        .attr("class", "bar-percentage");
+
+
+}
+
+function changeAgeStatistics(element) {
+    if (element != null) {
+        $("#age-label").text($(element).prev().text());
+        var range = ($(element).prev().text()).split("-");
+    }
+    else {
+        initialText = "25-29";
+        $("#age-label").text(initialText);
+        var range = (initialText).split("-");
+    }
+
+    var numberDeaths = 0;
+    for (i = 0; i < victims.length; i++) {
+        var age = victims[i]["Age"];
+        if (age >= Number(range[0]) &&  age <= Number(range[1])) {
+            numberDeaths++;
+        }
+    }
+    $("#age-number-deaths").text(numberDeaths);
+
+
+    var armedData = sortDataByType("Was the deceased armed?", range);
+    indexArmed = 0;
+    for (i = 0; i < armedData.length; i++) {
+        if (armedData[i].label == "Yes") {
+            indexArmed = i;
+            break;
+        }
+    }
+    var numberArmed = armedData[indexArmed].value;
+    var totalInRange = 0;
+    for (i = 0; i < victims.length; i++) {
+        if (victims[i]["Age"] >= range[0] && victims[i]["Age"] <= range[1]) {
+            totalInRange++;
+        }
+    }
+    numberArmed = ((numberArmed / totalInRange) * 100).toFixed(2);
+    $("#age-percentage-armed").text(numberArmed + "%");
+
+    var raceData = sortDataByType("Race", range);
+    var maxValue = 0;
+    var maxIndex = 0;
+    for (i = 0; i < raceData.length; i++) {
+        if (raceData[i].value > maxValue) {
+            maxValue = raceData[i].value;
+            maxIndex = i;
+        }
+    }
+    $("#age-common-race").text(raceData[maxIndex].label);
+
+    var officerData = sortDataByType("Was the officer involved fired or suspended?", range);
+    indexPunished = 0;
+    for (i = 0; i < officerData.length; i++) {
+        if (officerData[i].label == "Yes") {
+            indexPunished = i;
+            break;
+        }
+    }
+    var numberPunished = officerData[indexPunished].value;
+    numberPunished = ((numberPunished / totalInRange) * 100).toFixed(2);
+    $("#age-officer-punished").text(numberPunished + "%");
+}
+
+createPieChart("Race", null);
+createBarChart();
+changeAgeStatistics(null);
+
+// FIX ME LATER....
+$(".pie-text").mouseover(function() {
+    $(this).prev().css("fill", "#ccc;");
+});
+
+$(".bars").click(function() {
+    $(".bars").removeClass("selected-bar")
+    $(".bars").css("background-color", "#ACCFCC")
+    $(this).addClass("selected-bar");
+    $(this).css("background-color", "#8a0917");
+    changeAgeStatistics(this);
+});
+
+$(".bars").mouseover(function() {
+    if (!($(this).hasClass("selected-bar"))) {
+        $(this).css("background-color", "#eee");
+    }
+});
+
+$(".bars").mouseout(function() {
+    if (!($(this).hasClass("selected-bar"))) {
+        $(this).css("background-color", "#ACCFCC");
+    }
+});

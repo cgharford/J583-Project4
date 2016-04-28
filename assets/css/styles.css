@@ -15,7 +15,7 @@ body {
 
 .content-container {
     background-color: #B8AE9C;
-
+    padding-bottom: 4em;
 }
 
 .introduction {
@@ -29,6 +29,10 @@ body {
     font-weight: 300;
 }
 
+.other-controller {
+    padding-top: 2em;
+}
+
 .line {
     padding: 2em 0em;
     border-bottom: 1px dashed white;
@@ -36,7 +40,7 @@ body {
 
 .list-label {
     float: left;
-    padding: 1.5em 0px 1em 45px;
+    padding: 1.5em 0px 1em 52px;
     font-size: 20px;
     color: #595241;
     font-weight: bold;
@@ -54,7 +58,7 @@ body {
     color: white;
     margin: .75em;
     height: 180px;
-    width: 180px;
+    width: 17.5%;
     float: left;
     border-radius:1em;
     padding: 1em;
@@ -82,18 +86,24 @@ body {
 }
 
 #personal-info {
-    padding: 20px 320px;
+    padding: 20px;
     line-height: 150%;
     font-size: 15px;
     color: black;
     font-weight: 200;
+    width: 50%;
+    height: 50%;
+    background-color: white;
+    border-radius: .5em;
+    margin: auto;
+    margin-top: 2em;
 }
 
 .photo {
     width: 25%;
     height: 25%;
     float: left;
-    margin: 0em 1em 1em 0em;
+    margin: 0em 1em 0em 0em;
 }
 
 #demographics {
@@ -106,7 +116,7 @@ body {
 }
 
 #personal-info-demographics {
-    color: white;
+    color: #C7B791;
     font-size: 16px;
     font-weight: bold;
 }
@@ -139,10 +149,10 @@ body {
     cursor: pointer;
 }
 
-.news-link{text-decoration: none; color: white;}
-.news-link:visited {text-decoration: none; color: white;}
+.news-link{text-decoration: none; color: #C7B791;}
+.news-link:visited {text-decoration: none; color: #C7B791;}
 .news-link:hover {text-decoration: none; color: #ACCFCC;}
-.news-link:active {text-decoration: none; color: white;}
+.news-link:active {text-decoration: none; color: #C7B791;}
 
 
 .pagination>li>a, .pagination>li>span {
@@ -181,6 +191,7 @@ body {
     border-radius: 1em;
     float: left;
     padding: 2em 4em;
+    height: 675px;
 }
 
 #category-label {
@@ -209,7 +220,6 @@ body {
 }
 
 g.slice {
-    /*font-size: 40px;*/
     font-family: Helvetica;
     font-weight: 400;
     cursor: pointer;
@@ -217,7 +227,6 @@ g.slice {
 
 g.slice:hover {
     fill: #eee;
-
     font-weight: bold;
     display: block;
 }
@@ -240,7 +249,89 @@ g.slice:hover {
 }
 
 .circle {
-	padding: 5px;
+	padding: 8px;
     color: white;
     font-size: 13px;
+    font-weight: 300;
+}
+
+#bar-chart {
+    float: left;
+    margin-left: 2em;
+}
+
+.bars  {
+  font: 10px sans-serif;
+  background-color: #ACCFCC;
+  text-align: right;
+  padding: 5px;
+  margin: 7px;
+  color: white;
+  height: 20px;
+}
+
+.bars:hover {
+  background-color: #eee;
+  cursor: pointer;
+}
+
+.selected-bar {
+    background-color: #8a0917;
+}
+
+.bar-container {
+    margin-left: 55px;
+}
+
+.bar-label {
+    position: absolute;
+    left: 52px;
+}
+
+.bar-percentage {
+    margin-right: -80px;
+    font-size: 20px;
+    margin-top: -5px;
+    font-weight: 300;
+}
+
+.age-info {
+    float: right;
+    margin-right: 2em;
+    height: 405px;
+}
+
+#age-label {
+    color: #8a0917;
+    font-size: 40px;
+    font-family: 'Volkhov', serif;
+    text-align: center;
+    margin-top: -10px;
+}
+
+.general-age-label {
+    text-align: left;
+    color: black;
+    font-size: 17px;
+    margin-left: -20px;
+}
+
+.general-age-response {
+    text-align: left;
+    font-size: 20px;
+    color: #ACCFCC;
+    font-weight: bold;
+    margin-left: -20px;
+    padding: .25em 0em;
+}
+
+.footer {
+    background-color: #8a0917;
+    background-image: url("http://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
+    width: 100%;
+    color: white;
+    font-size: 18px;
+    font-family: 'Volkhov', serif;
+    text-align: center;
+    padding: .5em;
 }
