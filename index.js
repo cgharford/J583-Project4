@@ -8,7 +8,7 @@ app.use(express.static(__dirname + '/assets'));
 // Use ejs for embedded templates
 app.set('view engine', 'ejs');
 
-// This is our route
+// This is our route for the single-page app
 app.get('/', function(req, res){
     res.render('index');
 });

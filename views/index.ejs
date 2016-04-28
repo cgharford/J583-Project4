@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>Data Visualization App</title>
+        <title>Police Related Deaths</title>
+        <!-- CSS styles -->
         <link rel="stylesheet" href="/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link href='https://fonts.googleapis.com/css?family=Volkhov' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="/css/styles.css" />
 
+        <!-- Javascript files -->
         <script src="/js/angular.min.js"></script>
         <script src="/js/jquery-2.2.0.min.js"></script>
         <script src="/js/bootstrap.min.js"></script>
@@ -14,13 +16,15 @@
         <script src="/js/dirPagination.js"></script>
         <script src="/js/app.js"></script>
     </head>
-
-    <body ng-app="myApp">
+    <body ng-app="app">
+        <!-- Header -->
         <div class="header col-lg-12">
             Innocent or Incriminate?
         </div>
+        <!-- Main content -->
         <div class="col-lg-12">
             <div class="col-lg-10 col-lg-offset-1 content-container">
+                <!-- Introduction and instructions for angular component -->
                 <div class="introduction">
                     With the recent controversies surrounding the Black Lives Matter
                     movement, many people have been concerned about police-related deaths
@@ -34,14 +38,17 @@
                 <div ng-controller="MyController" id= "MyController" class="my-controller list-container">
                     <div class="row">
                         <span class="list-label">
-                            Individuals killed in police-related incidents
+                            Individuals Killed in Police-related Incidents
                         </span>
+                        <!-- Search functionality filters based on keyword -->
                         <span class="search">
                             <input ng-model="q" id="search" class="form-control" placeholder="Search by keyword">
                         </span>
                     </div>
+                    <!-- Individual deaths boxes with pagination component -->
                     <div class="row box-container">
                         <div ng-model="pageSize"></div>
+                        <!-- Link to pagination section -->
                         <dir dir-paginate="person in victims | filter:q | itemsPerPage: pageSize" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
                             <div class="boxes" >
                                 <div class="box-name">{{ person.Name }}</div>
@@ -52,6 +59,7 @@
                             </div>
                         </dir>
                     </div>
+                    <!-- When user clicks on a box above, the details are shown in a drop-down box that can be re-hidden -->
                     <div id="personal-info">
                         <img ng-show="showImage" ng-src="{{image}}" class="photo">
                         <i ng-click="hideIndivudualInfo()" class="fa fa-2x fa-times" id="hide-icon" aria-hidden="true"></i>
@@ -70,16 +78,17 @@
                         <div class="answers" id="">{{priors}}</div>
                         <div class="questions" id="">Was the officer involved fired or suspended? </div>
                         <div class="answers" id="">{{officer}}</div>
-
                         <div id="link">News story can be found
                             <a ng-show="showLink" ng-src="{{newsLink}}" class="news-link"> here. </a>
                         </div>
                     </div>
+                    <!-- Separate controller for pagination -->
                     <div ng-controller="OtherController" class="other-controller col-lg-12">
                         <div class="text-center">
                             <dir-pagination-controls boundary-links="true" on-page-change="pageChangeHandler(newPageNumber)" template-url="/dirPagination.tpl.html"></dir-pagination-controls>
                         </div>
                     </div>
+                    <!-- Pie chart section instructions -->
                     <div class="row">
                         <span class="list-label">
                             Statistics by Demographics
@@ -95,7 +104,9 @@
 
                         Below is a list of all recorded. Use the graph below.
                     </div>
+                    <!-- Contains pie chart and bar graph -->
                     <div class="chart-container">
+                        <!-- When the user clicks on different categories the graph changes -->
                         <div class="category-panel">
                             <div id="category-label">Categories</div>
                             <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
@@ -105,16 +116,18 @@
                             <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
                             <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
                         </div>
+                        <!-- Pie chart with labels -->
                         <div class="pie-chart-container">
                             <div id="chart-labels"></div>
                             <div id="pie-chart"></div>
                         </div>
                     </div>
+                    <!-- Bar chart instructions -->
                     <div class="row"></div>
                     <div id="bar-chart-container">
                         <div class="row">
                             <span class="list-label">
-                                Statistics by Demographics
+                                Highlights by Age
                             </span>
                         </div>
                         <div class="instructions">
@@ -127,7 +140,9 @@
 
                             Below is a list of all recorded. Use the graph below.
                         </div>
+                        <!-- Bar chart with labels -->
                         <div id="bar-chart"></div>
+                        <!-- When the user clicks on different bars on the graph the information displayed in this box changes -->
                         <div class="category-panel age-info">
                             <div id="category-label">Age Statistics</div>
                             <div id="age-label">25-29</div>
@@ -140,18 +155,17 @@
                             <div class="general-age-label">Officer punished: </div>
                             <div class="general-age-response" id="age-officer-punished"></div>
                         </div>
-                        <div class="pie-chart-container">
-                            <div id="chart-labels"></div>
-                            <div id="pie-chart"></div>
-                        </div>
                     </div>
+                    <!-- Sets up d3 charts -->
                     <script src="/js/d3charts.js"></script>
                 </div>
             </div>
         </div>
+        <!-- Footer with informational links -->
         <div class="footer col-lg-12">
-            <span>Code repository</span>
-            <span>Source credit</span>
+            <span><a href="https://github.com/cgharford/J583-Project4" class="footer-link">Code repository</a></span>
+            <i class="fa fa-certificate footer-icon" aria-hidden="true"></i>
+            <span><a href="http://www.crowdflower.com/data-for-everyone/" class="footer-link">Source credit</a></span>
         </div>
     </body>
 </html>

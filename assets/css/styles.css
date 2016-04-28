@@ -1,3 +1,5 @@
+/* Custom stylesheet for application */
+
 body {
     background-color: white;
 }
@@ -341,7 +343,17 @@ g.slice:hover {
     padding: .5em;
 }
 
+a.footer-link:link {text-decoration: none; color: white;}
+a.footer-link:visited {text-decoration: none; color: white;}
+a.footer-link:hover {text-decoration: none; color: #ACCFCC;}
+a.footer-link:active {text-decoration: none; color: white;}
+
+.footer-icon {
+    padding: 0px 5px;
+}
+
 /* Styles for responsiveness */
+
 @media screen and (max-width: 1300px) {
     .pie-chart-container {
         float: none;
@@ -422,6 +434,9 @@ g.slice:hover {
     }
     .search {
         margin-left: 30%;
+    }
+    #personal-info {
+        width: 80%;
     }
 }
 

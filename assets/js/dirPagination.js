@@ -322,7 +322,6 @@
             });
 
             scope.setCurrent = function(num) {
-                console.log("here?");
                 if (paginationService.isRegistered(paginationId) && isValidPageNumber(num)) {
                     num = parseInt(num, 10);
                     paginationService.setCurrentPage(paginationId, num);

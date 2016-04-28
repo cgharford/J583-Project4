@@ -1,11 +1,19 @@
+// D3 component of application
+
+// Initially create pie chat and bar chart with pre-selected values (understood
+//by null) to give users a sense of how the application works
 createPieChart("Race", null);
 createBarChart();
 changeAgeStatistics(null);
 
+// When the window resizes, reload d3 graphs for responsiveness and declare
+// jQuery functionality for the graphs
 $(window).resize(function() {
     createPieChart("Race", null);
     createBarChart();
 
+    // When bar graph is clicked, change its color and change statistic information
+    // in side box
     $(".bars").click(function() {
         $(".bars").removeClass("selected-bar")
         $(".bars").css("background-color", "#ACCFCC")
@@ -14,12 +22,14 @@ $(window).resize(function() {
         changeAgeStatistics(this);
     });
 
+    // Different color on hover
     $(".bars").mouseover(function() {
         if (!($(this).hasClass("selected-bar"))) {
             $(this).css("background-color", "#eee");
         }
     });
 
+    // Different color off hover
     $(".bars").mouseout(function() {
         if (!($(this).hasClass("selected-bar"))) {
             $(this).css("background-color", "#ACCFCC");
@@ -27,6 +37,7 @@ $(window).resize(function() {
     });
 });
 
+// Helper function that gets desired labels based on a field
 function getLabels(type) {
     var labels = [];
 
@@ -35,17 +46,20 @@ function getLabels(type) {
             labels.push(victims[i][type]);
         }
     }
-
     return labels;
 }
 
+// Helper function that
 function sortDataByType(type, ageRange) {
     var labels = [];
     var counts = [];
     var data = [];
 
+    // Iterate over entire deceased list
     for (i = 0; i < victims.length; i++) {
+        // If this is not the first time seeing this label, increment the frequency
         if (!labels.includes(victims[i][type])) {
+            // If this is for the bar graph component
             if (ageRange != null) {
                 age = victims[i]["Age"]
                 if (age >= ageRange[0] && age <= ageRange[1]) {
@@ -53,24 +67,29 @@ function sortDataByType(type, ageRange) {
                     counts[labels.indexOf(victims[i][type])] = 1;
                 }
             }
+            // If this is for the pie graph component
             else {
                 labels.push(victims[i][type]);
                 counts[labels.indexOf(victims[i][type])] = 1;
             }
         }
+        // If this is the first time seeing this label
         else {
+            // If this is for the bar graph component
             if (ageRange != null) {
                 age = victims[i]["Age"]
                 if (age >= ageRange[0] && age <= ageRange[1]) {
                     counts[labels.indexOf(victims[i][type])] += 1;
                 }
             }
+            // If this is for the pie graph component
             else {
                 counts[labels.indexOf(victims[i][type])] += 1;
             }
         }
     }
 
+    // Create main data array based on our labels and counts array
     for (i = 0; i < labels.length; i++) {
         data.push({"label": labels[i], "value": counts[labels.indexOf(labels[i])]});
     }
@@ -78,15 +97,20 @@ function sortDataByType(type, ageRange) {
     return data;
 }
 
+// Creates pie chart using d3
 function createPieChart(type, element) {
+    // If this is initial time loading pie chart, default to race category
     if (element == null) {
         $('#race').addClass("category-button-active");
     }
+    // If this was called via a user's click, change the button's appearance to reflect
+    // active state
     else {
         $('.category-button').removeClass("category-button-active");
         $(element).addClass("category-button-active");
     }
 
+    // Check window width for responsiveness
     if (window.innerWidth < 900) {
         var w = window.innerWidth * .82;
     }
@@ -94,8 +118,11 @@ function createPieChart(type, element) {
         var w = window.innerWidth * .45;
     }
 
+    // Set width, height, and radius
     var h = w;
     var r = h/2;
+
+    // Set array of default colors to cycle through
     var colors = [
         "#8A0917",
         "#ACCFCC",
@@ -110,9 +137,12 @@ function createPieChart(type, element) {
         "#949494"
     ];
 
+    // Get labels for the given fields
     var labels = getLabels(type);
+    // Get full list of labels and values
     var data = sortDataByType(type, null);
 
+    // Build labels with icon color codes above pie chart for user to match the color and value
     html = "";
     for (i = 0; i < labels.length; i++) {
         html += '<i class="fa fa-lg fa-circle" aria-hidden="true" style="color:' + colors[i % colors.length] + ';"></i>';
@@ -123,6 +153,7 @@ function createPieChart(type, element) {
 
     $('#pie-chart').empty();
 
+    // Append svg to pie chart element
     var vis = d3.select('#pie-chart')
         .append("svg:svg")
         .data([data])
@@ -131,18 +162,18 @@ function createPieChart(type, element) {
         .append("svg:g")
         .attr("transform", "translate(" + r + "," + r + ")");
 
-
+    // Use d3 pie chart layout
     var pie = d3.layout.pie()
         .value(function(d) {
             return d.value;}
         );
 
-    // declare an arc generator function
+    // Use an arc generator function
     var arc = d3.svg.arc()
         .outerRadius(r)
         .innerRadius(r - 200);
 
-    // select paths, use arc generator to draw
+    // Select paths from pie slices and generates arcs
     var arcs = vis.selectAll("g.slice")
         .data(pie)
         .enter()
@@ -152,6 +183,7 @@ function createPieChart(type, element) {
             return i;
         });
 
+    // Add oaths
     arcs.append("svg:path")
         .attr("fill", function(d, i){
             return colors[i % colors.length];
