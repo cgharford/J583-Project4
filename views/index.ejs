@@ -31,7 +31,7 @@
 
                     Below is a list of all recorded. Use the graph below.
                 </div>
-                <div ng-controller="MyController" class="my-controller list-container">
+                <div ng-controller="MyController" id= "MyController" class="my-controller list-container">
                     <div class="row">
                         <span class="list-label">
                             Individuals killed in police-related incidents
@@ -40,8 +40,9 @@
                             <input ng-model="q" id="search" class="form-control" placeholder="Search by keyword">
                         </span>
                     </div>
-                    <div class="row">
-                        <dir dir-paginate="person in victims | filter:q | itemsPerPage: 5" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
+                    <div class="row box-container">
+                        <div ng-model="pageSize"></div>
+                        <dir dir-paginate="person in victims | filter:q | itemsPerPage: pageSize" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
                             <div class="boxes" >
                                 <div class="box-name">{{ person.Name }}</div>
                                 <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>

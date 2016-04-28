@@ -52,6 +52,10 @@ body {
     padding: 2em 45px 1em 0em;
 }
 
+.box-container {
+    margin-right: 0em;
+}
+
 .boxes {
     background-color: #ACCFCC;
     font-family: 'Volkhov', serif;
@@ -191,7 +195,7 @@ body {
     border-radius: 1em;
     float: left;
     padding: 2em 4em;
-    height: 675px;
+    margin-right: 4em;
 }
 
 #category-label {
@@ -211,7 +215,8 @@ body {
 }
 
 .category-button:hover {
-    background-color: #ACCFCC;
+    background-color: #8a0917;
+    color: #eee;
     cursor: pointer;
 }
 
@@ -334,4 +339,107 @@ g.slice:hover {
     font-family: 'Volkhov', serif;
     text-align: center;
     padding: .5em;
+}
+
+/* Styles for responsiveness */
+@media screen and (max-width: 1300px) {
+    .pie-chart-container {
+        float: none;
+    }
+}
+
+@media screen and (max-width: 1200px) {
+    #bar-chart {
+        float: none;
+        padding-bottom: 2em;
+    }
+    .age-info {
+        float: none;
+        margin: 2em 4em 0em 4em;
+    }
+}
+
+@media screen and (max-width: 949px) {
+    .boxes {
+        width: 22%;
+    }
+}
+
+@media screen and (max-width: 900px) {
+    .introduction {
+        padding: 1em;
+    }
+    .list-label {
+        padding: 1.5em 0px .25em 33px;
+    }
+    .box-container {
+        margin-left: -30px;
+    }
+    .instructions {
+        padding: 1em 1em;
+    }
+    #chart-labels {
+        padding-top: 2em;
+    }
+    .bar-container {
+        margin-left: 35px;
+    }
+    .bar-label {
+        left: 33px;
+    }
+    .category-panel {
+        float: none;
+        margin: auto;
+    }
+    .chart-container {
+        padding: 15px 19px;
+    }
+}
+
+@media screen and (max-width: 799px) {
+    .boxes {
+        width: 29%;
+    }
+    .search {
+        float: none;
+        display: block;
+        margin: auto;
+        margin-left: 34%;
+        padding-top: 100px;
+    }
+}
+
+
+@media screen and (max-width: 700px) {
+    .header {
+        font-size: 32px;
+    }
+}
+
+@media screen and (max-width: 599px) {
+    .boxes {
+        width: 44%;
+    }
+    .search {
+        margin-left: 30%;
+    }
+}
+
+
+@media screen and (max-width: 500px) {
+    .age-info {
+        margin: 2em 1em 0em 1em;
+    }
+}
+
+@media screen and (max-width: 449px) {
+    .boxes {
+        width: 100%;
+    }
+    .box-container {
+        margin-right: 29px;
+    }
+    .search {
+        margin-left: 24%;
+    }
 }

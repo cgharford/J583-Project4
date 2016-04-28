@@ -1,3 +1,32 @@
+createPieChart("Race", null);
+createBarChart();
+changeAgeStatistics(null);
+
+$(window).resize(function() {
+    createPieChart("Race", null);
+    createBarChart();
+
+    $(".bars").click(function() {
+        $(".bars").removeClass("selected-bar")
+        $(".bars").css("background-color", "#ACCFCC")
+        $(this).addClass("selected-bar");
+        $(this).css("background-color", "#8a0917");
+        changeAgeStatistics(this);
+    });
+
+    $(".bars").mouseover(function() {
+        if (!($(this).hasClass("selected-bar"))) {
+            $(this).css("background-color", "#eee");
+        }
+    });
+
+    $(".bars").mouseout(function() {
+        if (!($(this).hasClass("selected-bar"))) {
+            $(this).css("background-color", "#ACCFCC");
+        }
+    });
+});
+
 function getLabels(type) {
     var labels = [];
 
@@ -58,7 +87,13 @@ function createPieChart(type, element) {
         $(element).addClass("category-button-active");
     }
 
-    var w = window.innerWidth * .45;
+    if (window.innerWidth < 900) {
+        var w = window.innerWidth * .82;
+    }
+    else {
+        var w = window.innerWidth * .45;
+    }
+
     var h = w;
     var r = h/2;
     var colors = [
@@ -139,7 +174,12 @@ function createPieChart(type, element) {
         })
         .style('opacity', function (d, i) {
             percentage = (100 * (data[i].value / victims.length)).toFixed(0);
-            if (percentage < 2) {
+            if (window.innerWidth < 500) {
+                if (percentage < 6) {
+                    return 0;
+                }
+            }
+            else if (percentage < 2) {
                 return 0;
             }
             else {
@@ -164,6 +204,47 @@ function createPieChart(type, element) {
 function createBarChart() {
     var type = "Age"
     var w = window.innerWidth;
+    var multiplier = 0;
+    if (w > 1395) {
+        multiplier = .6;
+    }
+    else if (w <= 1395 && w > 1220) {
+        multiplier = .9;
+    }
+    else if (w <= 1220 && w > 1200) {
+        multiplier = 1.1;
+    }
+    else if (w <= 1200 && w > 950) {
+        multiplier = .8;
+    }
+    else if (w <= 950 && w > 890) {
+        multiplier = .9;
+    }
+    else if (w <= 890 && w > 800) {
+        multiplier = 1.2;
+    }
+    else if (w <= 800 && w > 750) {
+        multiplier = 1.4;
+    }
+    else if (w <= 750 && w > 700) {
+        multiplier = 1.7;
+    }
+    else if (w <= 700 && w > 670) {
+        multiplier = 1.9;
+    }
+    else if (w <= 670 && w > 600) {
+        multiplier = 2.3;
+    }
+    else if (w <= 600 && w > 500) {
+        multiplier = 4;
+    }
+    else if (w <= 500 && w > 470) {
+        multiplier = 6;
+    }
+
+    else {
+        multiplier = 9;
+    }
 
     var data = [
         {"label": "5-9", "value": 0},
@@ -229,8 +310,10 @@ function createBarChart() {
     }
 
     var x = d3.scale.linear()
-        .domain([0, w * .6])
+        .domain([0, w * multiplier])
         .range([0, 1400]);
+
+    $("#bar-chart").empty();
 
     var chart = d3.select("#bar-chart");
 
@@ -324,15 +407,6 @@ function changeAgeStatistics(element) {
     numberPunished = ((numberPunished / totalInRange) * 100).toFixed(2);
     $("#age-officer-punished").text(numberPunished + "%");
 }
-
-createPieChart("Race", null);
-createBarChart();
-changeAgeStatistics(null);
-
-// FIX ME LATER....
-$(".pie-text").mouseover(function() {
-    $(this).prev().css("fill", "#ccc;");
-});
 
 $(".bars").click(function() {
     $(".bars").removeClass("selected-bar")
