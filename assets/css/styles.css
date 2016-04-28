@@ -4,8 +4,7 @@ body {
 
 .header {
     background-color: #8a0917;
-background-image: url("http://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
-/* This is mostly intended for prototyping; please download the pattern and re-host for production environments. Thank you! */
+    background-image: url("http://www.transparenttextures.com/patterns/45-degree-fabric-dark.png");
     width: 100%;
     color: white;
     font-family: 'Volkhov', serif;
@@ -209,18 +208,18 @@ background-image: url("http://www.transparenttextures.com/patterns/45-degree-fab
     background-color: #ACCFCC;
 }
 
-/*.invisible {
-    opacity: 0;
-}*/
-
 g.slice {
-    font-size: 40px;
+    /*font-size: 40px;*/
+    font-family: Helvetica;
+    font-weight: 400;
+    cursor: pointer;
 }
 
 g.slice:hover {
     fill: #eee;
-    font-size: 40px;
-    cursor: pointer;
+
+    font-weight: bold;
+    display: block;
 }
 
 .pie-slice {
@@ -229,4 +228,19 @@ g.slice:hover {
 
 .pie-slice:hover {
     fill: #ccc;
+}
+
+.pie-text {
+    text-anchor: middle;
+}
+
+#chart-labels {
+    text-align: center;
+    padding-bottom: 2em;
+}
+
+.circle {
+	padding: 5px;
+    color: white;
+    font-size: 13px;
 }

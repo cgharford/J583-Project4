@@ -1,4 +1,22 @@
 // D3 custum pie chart
+function pointIsInArc(pt, ptData, d3Arc) {
+  // Center of the arc is assumed to be 0,0
+  // (pt.x, pt.y) are assumed to be relative to the center
+  var r1 = d3Arc.innerRadius()(ptData), // Note: Using the innerRadius
+      r2 = d3Arc.outerRadius()(ptData),
+      theta1 = d3Arc.startAngle()(ptData),
+      theta2 = d3Arc.endAngle()(ptData);
+
+  var dist = pt.x * pt.x + pt.y * pt.y,
+      angle = Math.atan2(pt.x, -pt.y); // Note: different coordinate system.
+
+  angle = (angle < 0) ? (angle + Math.PI * 2) : angle;
+
+  return (r1 * r1 <= dist) && (dist <= r2 * r2) &&
+         (theta1 <= angle) && (angle <= theta2);
+}
+
+
 function createPieChart(type, element) {
     if (element == null) {
         $('#race').addClass("category-button-active");
@@ -14,7 +32,6 @@ function createPieChart(type, element) {
     var colors = [
         "#8A0917",
         "#ACCFCC",
-        "#FFFFFF",
         "#595241",
         "#C7B791",
         "#B00B1D",
@@ -40,6 +57,14 @@ function createPieChart(type, element) {
         }
     }
 
+    html = "";
+    for (i = 0; i < labels.length; i++) {
+        html += '<i class="fa fa-lg fa-circle" aria-hidden="true" style="color:' + colors[i % colors.length] + ';"></i>';
+        html += '<span class="circle">' + labels[i] + '</span>';
+    }
+    $('#chart-labels').empty();
+    $('#chart-labels').append(html);
+
     for (i = 0; i < labels.length; i++) {
         data.push({"label": labels[i], "value": counts[labels.indexOf(labels[i])]});
     }
@@ -61,13 +86,19 @@ function createPieChart(type, element) {
         );
 
     // declare an arc generator function
-    var arc = d3.svg.arc().outerRadius(r);
+    var arc = d3.svg.arc()
+        .outerRadius(r)
+        .innerRadius(r - 200);
 
     // select paths, use arc generator to draw
     var arcs = vis.selectAll("g.slice")
-        .data(pie).enter()
+        .data(pie)
+        .enter()
         .append("svg:g")
-        .attr("class", "slice");
+        .attr("class", "slice")
+        .attr("id", function(d, i){
+            return i;
+        });
 
     arcs.append("svg:path")
         .attr("fill", function(d, i){
@@ -76,20 +107,53 @@ function createPieChart(type, element) {
         .attr("d", function (d) {
             return arc(d);
         })
-        .attr("class", "pie-slice");
+        .attr("class", "pie-slice")
+        .style("stroke", "#AAAAAA")
 
-    // add the text
-    arcs.append("svg:text")
+    console.log(data);
+
+    arcs.append("text")
         .attr("transform", function(d) {
-            d.innerRadius = 0;
-            d.outerRadius = r;
             return "translate(" + arc.centroid(d) + ")";
         })
-        .attr("text-anchor", "middle").text( function(d, i) {
-            return data[i].label;
-        }
-        // .attr("class", "invisible")
-    );
+        .attr("id", function(d, i){
+            return "text-" + i;
+        })
+        .text( function(d, i) {
+            return (100 * (data[i].value / victims.length)).toFixed(0)  + "%";
+        })
+        .style('opacity', function (d, i) {
+            percentage = (100 * (data[i].value / victims.length)).toFixed(0);
+            if (percentage < 2) {
+                return 0;
+            }
+            else {
+                return 1;
+            }
+        })
+        .style("font-size", function(d, i) {
+            percentage = (100 * (data[i].value / victims.length)).toFixed(0);
+            if (percentage >= 30) {
+                return "40px";
+            }
+            if (percentage < 30 && percentage > 10) {
+                return "25px";
+            }
+            else {
+                return "5px;"
+            }
+        })
+        .attr("class", "pie-text");
 }
 
-createPieChart("Race", null)
+createPieChart("Race", null);
+
+// $(".slice").mouseover(function() {
+//     var id = $(this).get(0).id;
+//     $("#text-" + id).css("opacity", 1)
+// });
+//
+// $(".slice").mouseleave(function() {
+//     var id = $(this).get(0).id;
+//     $("#text-" + id).css("opacity", 0)
+// });

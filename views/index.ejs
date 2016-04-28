@@ -17,7 +17,7 @@
 
     <body ng-app="myApp">
         <div class="header">
-            Victims or Villians?
+            Innocent or Incriminate?
         </div>
         <div class="col-lg-10 col-lg-offset-1 content-container">
             <div class="introduction">
@@ -99,13 +99,12 @@
                         <div class="category-button" onclick="createPieChart('Gender', this)">Gender</div>
                         <div class="category-button" onclick="createPieChart('Cause of Death', this)">Cause of Death</div>
                         <div class="category-button" id="race" onclick="createPieChart('Race', this)">Race</div>
-                        <div class="category-button" onclick="createPieChart('Age', this)">Age</div>
-                        <div class="category-button" onclick="createPieChart('State', this)">State</div>
                         <div class="category-button" onclick="createPieChart('Was the deceased armed?', this)">Armed</div>
                         <div class="category-button" onclick="createPieChart('Did the deceased have priors?', this)">Priors</div>
                         <div class="category-button" onclick="createPieChart('Was the officer involved fired or suspended?', this)">Officer Punished</div>
                     </div>
                     <div class="pie-chart-container">
+                        <div id="chart-labels"></div>
                         <div id="chart"></div>
                     </div>
                 </div>

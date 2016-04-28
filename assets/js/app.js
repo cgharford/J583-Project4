@@ -13,6 +13,7 @@ var victims = (function() {
     return json;
 })();
 
+// Create angular application
 var myApp = angular.module('myApp', ['angularUtils.directives.dirPagination']);
 
 myApp.controller('MyController', [ '$scope', '$http', function($scope, $http) {
