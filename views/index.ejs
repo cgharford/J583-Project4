@@ -49,7 +49,7 @@
                     <div class="row box-container">
                         <div ng-model="pageSize"></div>
                         <!-- Link to pagination section -->
-                        <dir dir-paginate="person in victims | filter:q | itemsPerPage: pageSize" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
+                        <dir dir-paginate="person in deceased | filter:q | itemsPerPage: pageSize" current-page="currentPage" ng-click="displayIndivudualInfo(person)">
                             <div class="boxes" >
                                 <div class="box-name">{{ person.Name }}</div>
                                 <div class="box-info"><span class="box-info-label">Gender: </span>{{ person.Gender }}</div>

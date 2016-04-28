@@ -41,9 +41,9 @@ $(window).resize(function() {
 function getLabels(type) {
     var labels = [];
 
-    for (i = 0; i < victims.length; i++) {
-        if (!labels.includes(victims[i][type])) {
-            labels.push(victims[i][type]);
+    for (i = 0; i < deceased.length; i++) {
+        if (!labels.includes(deceased[i][type])) {
+            labels.push(deceased[i][type]);
         }
     }
     return labels;
@@ -56,35 +56,35 @@ function sortDataByType(type, ageRange) {
     var data = [];
 
     // Iterate over entire deceased list
-    for (i = 0; i < victims.length; i++) {
+    for (i = 0; i < deceased.length; i++) {
         // If this is not the first time seeing this label, increment the frequency
-        if (!labels.includes(victims[i][type])) {
+        if (!labels.includes(deceased[i][type])) {
             // If this is for the bar graph component
             if (ageRange != null) {
-                age = victims[i]["Age"]
+                age = deceased[i]["Age"]
                 if (age >= ageRange[0] && age <= ageRange[1]) {
-                    labels.push(victims[i][type]);
-                    counts[labels.indexOf(victims[i][type])] = 1;
+                    labels.push(deceased[i][type]);
+                    counts[labels.indexOf(deceased[i][type])] = 1;
                 }
             }
             // If this is for the pie graph component
             else {
-                labels.push(victims[i][type]);
-                counts[labels.indexOf(victims[i][type])] = 1;
+                labels.push(deceased[i][type]);
+                counts[labels.indexOf(deceased[i][type])] = 1;
             }
         }
         // If this is the first time seeing this label
         else {
             // If this is for the bar graph component
             if (ageRange != null) {
-                age = victims[i]["Age"]
+                age = deceased[i]["Age"]
                 if (age >= ageRange[0] && age <= ageRange[1]) {
-                    counts[labels.indexOf(victims[i][type])] += 1;
+                    counts[labels.indexOf(deceased[i][type])] += 1;
                 }
             }
             // If this is for the pie graph component
             else {
-                counts[labels.indexOf(victims[i][type])] += 1;
+                counts[labels.indexOf(deceased[i][type])] += 1;
             }
         }
     }
@@ -206,11 +206,11 @@ function createPieChart(type, element) {
         })
         // Generate percentage label based on the values from the data
         .text( function(d, i) {
-            return (100 * (data[i].value / victims.length)).toFixed(0)  + "%";
+            return (100 * (data[i].value / deceased.length)).toFixed(0)  + "%";
         })
         // Whether or not the label displays depends on how big the percentage is
         .style('opacity', function (d, i) {
-            percentage = (100 * (data[i].value / victims.length)).toFixed(0);
+            percentage = (100 * (data[i].value / deceased.length)).toFixed(0);
             // Take into account screen size
             if (window.innerWidth < 500) {
                 if (percentage < 6) {
@@ -226,7 +226,7 @@ function createPieChart(type, element) {
         })
         // Set font-size based on percentage...the higher, the bigger
         .style("font-size", function(d, i) {
-            percentage = (100 * (data[i].value / victims.length)).toFixed(0);
+            percentage = (100 * (data[i].value / deceased.length)).toFixed(0);
             if (percentage >= 30) {
                 return "40px";
             }
@@ -307,47 +307,47 @@ function createBarChart() {
     ];
 
     // Iterate through deceased list and tally individuals in each age range
-    for (i = 0; i < victims.length; i++) {
-        if (victims[i][type] >= 5 && victims[i][type] <= 9) {
+    for (i = 0; i < deceased.length; i++) {
+        if (deceased[i][type] >= 5 && deceased[i][type] <= 9) {
             data[0]["value"] += 1;
         }
-        if (victims[i][type] >= 10 && victims[i][type] <= 14) {
+        if (deceased[i][type] >= 10 && deceased[i][type] <= 14) {
             data[1]["value"] += 1;
         }
-        if (victims[i][type] >= 15 && victims[i][type] <= 19) {
+        if (deceased[i][type] >= 15 && deceased[i][type] <= 19) {
             data[2]["value"] += 1;
         }
-        if (victims[i][type] >= 20 && victims[i][type] <= 24) {
+        if (deceased[i][type] >= 20 && deceased[i][type] <= 24) {
             data[3]["value"] += 1;
         }
-        if (victims[i][type] >= 25 && victims[i][type] <= 29) {
+        if (deceased[i][type] >= 25 && deceased[i][type] <= 29) {
             data[4]["value"] += 1;
         }
-        if (victims[i][type] >= 30 && victims[i][type] <= 34) {
+        if (deceased[i][type] >= 30 && deceased[i][type] <= 34) {
             data[5]["value"] += 1;
         }
-        if (victims[i][type] >= 35 && victims[i][type] <= 39) {
+        if (deceased[i][type] >= 35 && deceased[i][type] <= 39) {
             data[6]["value"] += 1;
         }
-        if (victims[i][type] >= 40 && victims[i][type] <= 44) {
+        if (deceased[i][type] >= 40 && deceased[i][type] <= 44) {
             data[7]["value"] += 1;
         }
-        if (victims[i][type] >= 45 && victims[i][type] <= 49) {
+        if (deceased[i][type] >= 45 && deceased[i][type] <= 49) {
             data[8]["value"] += 1;
         }
-        if (victims[i][type] >= 50 && victims[i][type] <= 54) {
+        if (deceased[i][type] >= 50 && deceased[i][type] <= 54) {
             data[9]["value"] += 1;
         }
-        if (victims[i][type] >= 55 && victims[i][type] <= 59) {
+        if (deceased[i][type] >= 55 && deceased[i][type] <= 59) {
             data[10]["value"] += 1;
         }
-        if (victims[i][type] >= 60 && victims[i][type] <= 64) {
+        if (deceased[i][type] >= 60 && deceased[i][type] <= 64) {
             data[11]["value"] += 1;
         }
-        if (victims[i][type] >= 65 && victims[i][type] <= 69) {
+        if (deceased[i][type] >= 65 && deceased[i][type] <= 69) {
             data[12]["value"] += 1;
         }
-        if (victims[i][type] >= 70 && victims[i][type] <= 74) {
+        if (deceased[i][type] >= 70 && deceased[i][type] <= 74) {
             data[13]["value"] += 1;
         }
     }
@@ -385,7 +385,7 @@ function createBarChart() {
         // Put percentage on the end of each bar
         .append("div")
         .text(function(d) {
-            return ( 100 * (d.value / victims.length)).toFixed(2) + "%";
+            return ( 100 * (d.value / deceased.length)).toFixed(2) + "%";
         })
         .attr("class", "bar-percentage");
 }
@@ -406,8 +406,8 @@ function changeAgeStatistics(element) {
 
     // Compute the total number of deaths for the age range and add to page
     var numberDeaths = 0;
-    for (i = 0; i < victims.length; i++) {
-        var age = victims[i]["Age"];
+    for (i = 0; i < deceased.length; i++) {
+        var age = deceased[i]["Age"];
         if (age >= Number(range[0]) &&  age <= Number(range[1])) {
             numberDeaths++;
         }
@@ -425,8 +425,8 @@ function changeAgeStatistics(element) {
     }
     var numberArmed = armedData[indexArmed].value;
     var totalInRange = 0;
-    for (i = 0; i < victims.length; i++) {
-        if (victims[i]["Age"] >= range[0] && victims[i]["Age"] <= range[1]) {
+    for (i = 0; i < deceased.length; i++) {
+        if (deceased[i]["Age"] >= range[0] && deceased[i]["Age"] <= range[1]) {
             totalInRange++;
         }
     }

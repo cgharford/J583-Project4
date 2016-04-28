@@ -1,12 +1,12 @@
 // Angular component of application
 
 // Initially load in our json file using ajax to gloabl variable
-var victims = (function() {
+var deceased = (function() {
     var json = null;
     $.ajax({
         'async': false,
         'global': false,
-        'url': "../victims.json",
+        'url': "../deceased.json",
         'dataType': "json",
         'success': function (data) {
             json = data;
@@ -23,10 +23,10 @@ app.controller('MyController', [ '$scope', '$http', "$window", function($scope, 
     // Initially hide personal info box and reset information
     $("#personal-info").hide();
     $scope.currentPage = 1;
-    $scope.victims = [];
+    $scope.deceased = [];
     $scope.showImage = false;
     $scope.showLink = false;
-    $scope.victims = victims;
+    $scope.deceased = deceased;
     resetPageSize();
 
     // When user clicks on box, set up personal information box and display as a dropdown
