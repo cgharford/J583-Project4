@@ -183,8 +183,9 @@ function createPieChart(type, element) {
             return i;
         });
 
-    // Add oaths
+    // Add paths using arcs generated
     arcs.append("svg:path")
+        // Cycle through colors array
         .attr("fill", function(d, i){
             return colors[i % colors.length];
         })
@@ -194,18 +195,23 @@ function createPieChart(type, element) {
         .attr("class", "pie-slice")
         .style("stroke", "#AAAAAA")
 
+    // Add percentage labels to pie slices of they will will visually fit
     arcs.append("text")
         .attr("transform", function(d) {
             return "translate(" + arc.centroid(d) + ")";
         })
+        // Add unique id to text element
         .attr("id", function(d, i){
             return "text-" + i;
         })
+        // Generate percentage label based on the values from the data
         .text( function(d, i) {
             return (100 * (data[i].value / victims.length)).toFixed(0)  + "%";
         })
+        // Whether or not the label displays depends on how big the percentage is
         .style('opacity', function (d, i) {
             percentage = (100 * (data[i].value / victims.length)).toFixed(0);
+            // Take into account screen size
             if (window.innerWidth < 500) {
                 if (percentage < 6) {
                     return 0;
@@ -218,6 +224,7 @@ function createPieChart(type, element) {
                 return 1;
             }
         })
+        // Set font-size based on percentage...the higher, the bigger
         .style("font-size", function(d, i) {
             percentage = (100 * (data[i].value / victims.length)).toFixed(0);
             if (percentage >= 30) {
@@ -233,8 +240,11 @@ function createPieChart(type, element) {
         .attr("class", "pie-text");
 }
 
+// Creates a bar graph using d3
 function createBarChart() {
+    // Focus of bar graph is age frequency
     var type = "Age"
+    // Set ultiplier for bar chart based on screen size for responsiveness
     var w = window.innerWidth;
     var multiplier = 0;
     if (w > 1395) {
@@ -273,11 +283,11 @@ function createBarChart() {
     else if (w <= 500 && w > 470) {
         multiplier = 6;
     }
-
     else {
         multiplier = 9;
     }
 
+    // Set age ranges and labels for bar graph
     var data = [
         {"label": "5-9", "value": 0},
         {"label": "10-14", "value": 0},
@@ -296,6 +306,7 @@ function createBarChart() {
         {"label": "75-79", "value": 0},
     ];
 
+    // Iterate through deceased list and tally individuals in each age range
     for (i = 0; i < victims.length; i++) {
         if (victims[i][type] >= 5 && victims[i][type] <= 9) {
             data[0]["value"] += 1;
@@ -341,20 +352,22 @@ function createBarChart() {
         }
     }
 
+    // Create a linear scale based on the screen size
     var x = d3.scale.linear()
         .domain([0, w * multiplier])
         .range([0, 1400]);
 
     $("#bar-chart").empty();
-
     var chart = d3.select("#bar-chart");
 
+    // Create bar containers for different sized bars and labels
     var bars = chart.selectAll("div")
         .data(data)
         .enter()
         .append("div")
         .attr("class", "bar-container")
 
+    // Put labels for each age range on each bar
     bars.append("div")
         .data(data)
         .text(function(d) {
@@ -362,32 +375,36 @@ function createBarChart() {
         })
         .attr("class", "bar-label");
 
+    // Make widths of the bars correspond to the frequencies
     bars.append("div")
         .data(data)
         .attr("class", "bars")
         .style("width", function(d) {
             return x(d.value) + "px";
         })
+        // Put percentage on the end of each bar
         .append("div")
         .text(function(d) {
             return ( 100 * (d.value / victims.length)).toFixed(2) + "%";
         })
         .attr("class", "bar-percentage");
-
-
 }
 
+// Changes informational box on the side when user clicks on a different age range
 function changeAgeStatistics(element) {
+    // If user cllicked on a bar, get age range for that bar
     if (element != null) {
         $("#age-label").text($(element).prev().text());
         var range = ($(element).prev().text()).split("-");
     }
+    // Otherwise, this is the initial load and user default age range
     else {
         initialText = "25-29";
         $("#age-label").text(initialText);
         var range = (initialText).split("-");
     }
 
+    // Compute the total number of deaths for the age range and add to page
     var numberDeaths = 0;
     for (i = 0; i < victims.length; i++) {
         var age = victims[i]["Age"];
@@ -397,7 +414,7 @@ function changeAgeStatistics(element) {
     }
     $("#age-number-deaths").text(numberDeaths);
 
-
+    // Computer the total percentage of individuals who were armed bofore being killed
     var armedData = sortDataByType("Was the deceased armed?", range);
     indexArmed = 0;
     for (i = 0; i < armedData.length; i++) {
@@ -416,6 +433,7 @@ function changeAgeStatistics(element) {
     numberArmed = ((numberArmed / totalInRange) * 100).toFixed(2);
     $("#age-percentage-armed").text(numberArmed + "%");
 
+    // Compute the most common race killed for the given age range
     var raceData = sortDataByType("Race", range);
     var maxValue = 0;
     var maxIndex = 0;
@@ -427,6 +445,7 @@ function changeAgeStatistics(element) {
     }
     $("#age-common-race").text(raceData[maxIndex].label);
 
+    // Compute the percentage of officers who were suspended or fired due to the incident
     var officerData = sortDataByType("Was the officer involved fired or suspended?", range);
     indexPunished = 0;
     for (i = 0; i < officerData.length; i++) {
@@ -440,6 +459,10 @@ function changeAgeStatistics(element) {
     $("#age-officer-punished").text(numberPunished + "%");
 }
 
+// jQuery functionality must be declared twice because of window resize
+
+// When bar graph is clicked, change its color and change statistic information
+// in side box
 $(".bars").click(function() {
     $(".bars").removeClass("selected-bar")
     $(".bars").css("background-color", "#ACCFCC")
@@ -448,12 +471,14 @@ $(".bars").click(function() {
     changeAgeStatistics(this);
 });
 
+// Different color on hover
 $(".bars").mouseover(function() {
     if (!($(this).hasClass("selected-bar"))) {
         $(this).css("background-color", "#eee");
     }
 });
 
+// Different color off hover
 $(".bars").mouseout(function() {
     if (!($(this).hasClass("selected-bar"))) {
         $(this).css("background-color", "#ACCFCC");
