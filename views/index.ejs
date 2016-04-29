@@ -19,7 +19,7 @@
     <body ng-app="app">
         <!-- Header -->
         <div class="header col-lg-12">
-            Innocent or Incriminate?
+            Innocent or Incriminated?
         </div>
         <!-- Main content -->
         <div class="col-lg-12">
@@ -28,7 +28,7 @@
                 <div class="introduction">
                     With the recent controversies and social uproar surrounding the Black Lives Matter
                     movement, the police force as a whole has been under a good deal of public scrutiny
-                    due to incidents involving police-involved fatalities. This data visualization application
+                    due to incidents involving police-related fatalities. This data visualization application
                     is drawn from a dataset of over 2,000 recorded police-related deaths from 2013-2015.
                     Dive into the data and decide for yourself what implications these statistics have for our
                     law enforcement and our country.
@@ -36,10 +36,10 @@
                     <br><br>
 
                     Below is a list of all deceased individuals from the given dataset. Use the pagination panel below
-                    the boxes to cycle through the data and the search bar to filter by any keywords. Click on any
-                    of the boxes to view a dropdown with more detailed information on each person. When you are
+                    the boxes to cycle through the data and the search bar to filter by any keywords. Click on the individual
+                    boxes to view a dropdown with more detailed information on each person. When you are
                     finished viewing the personal information simply click the red X in the top right corner of
-                    the box to close the dropdown.
+                    the dropdown to close it.
                 </div>
                 <div ng-controller="MyController" id= "MyController" class="my-controller list-container">
                     <div class="row">
@@ -85,7 +85,7 @@
                         <div class="questions" id="">Was the officer involved fired or suspended? </div>
                         <div class="answers" id="">{{officer}}</div>
                         <div id="link">News story can be found
-                            <a ng-show="showLink" ng-src="{{newsLink}}" class="news-link"> here. </a>
+                            <a ng-show="showLink" href="{{newsLink}}" class="news-link"> here. </a>
                         </div>
                     </div>
                     <!-- Separate controller for pagination -->
@@ -104,7 +104,7 @@
                         Take a step back and look at the broader picture represented by the data.
                         Here you can view the statistics related to the deaths filtered by specific
                         categories. Click on the buttons on the left panel to change the chart and
-                        view the facts regarding each demographic or scenerio.
+                        study the facts regarding each demographic or scenerio.
                     </div>
                     <!-- Contains pie chart and bar graph -->
                     <div class="chart-container">
@@ -133,7 +133,7 @@
                             </span>
                         </div>
                         <div class="instructions">
-                            Now let's take a closer look at the age range of the deceased individuals
+                            Take a closer look at the age range of the deceased individuals
                             and draw information from the statistics surrounding their death. Click on
                             any of the bars to view the specific facts for a given age range on the right
                             panel.
