@@ -14,7 +14,7 @@ command:
 Once you have cloned the git repository, cd into the project, make sure vagrant
 is running, and install dependencies on your computer (NOT THE VAGRANT MACHINE):
 
-    $ cd J583-Project2
+    $ cd J583-Project4
     $ vagrant up
     $ npm install
 
@@ -28,6 +28,6 @@ Move to the shared folder and start the server using these commands:
     $ nodejs index.js
 
 Please note that the last command may either use 'node' or 'nodejs', depending
-on which version you may have installed on your computer.
+on which version you have installed on your computer.
 
 Navigate to http://localhost:3000/ and explore the data.
